@@ -37,6 +37,7 @@ for key, value in dict.items():
         priceTagUp = soup.find_all("div", class_="dltlu-point up")
         priceTagEq = soup.find_all("div", class_="dltlu-point eq")
         priceTagDown = soup.find_all("div", class_="dltlu-point down")
+        priceTagFl = soup.find_all("div", class_="dltlu-point fl")
         priceTag = ""
         if len(priceTagUp) > 0:
             priceTag = str(int(float(priceTagUp[0].text) * 1000))
@@ -44,5 +45,7 @@ for key, value in dict.items():
             priceTag = str(int(float(priceTagEq[0].text) * 1000))
         elif len(priceTagDown):
             priceTag = str(int(float(priceTagDown[0].text) * 1000))
+        elif len(priceTagFl):
+            priceTag = str(int(float(priceTagFl[0].text) * 1000))
         db.child("eodPrices").child(key).set(priceTag)
         print("Stock price for " + key + " is " + priceTag)
