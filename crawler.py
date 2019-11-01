@@ -56,6 +56,8 @@ for key, value in dict.items():
         priceTagEq = soup.find_all("div", class_="dltlu-point eq")
         priceTagDown = soup.find_all("div", class_="dltlu-point down")
         priceTagFl = soup.find_all("div", class_="dltlu-point fl")
+        priceTagCe = soup.find_all("div", class_="dltlu-point ce")
+        priceTagPri = soup.find_all("div", class_="pri")
         thumbnailUrl = getCompanyThumbnail(soup)
         priceTag = ""
         if len(priceTagUp) > 0:
@@ -66,6 +68,10 @@ for key, value in dict.items():
             priceTag = str(int(float(priceTagDown[0].text) * 1000))
         elif len(priceTagFl):
             priceTag = str(int(float(priceTagFl[0].text) * 1000))
+        elif len(priceTagCe):
+            priceTag = str(int(float(priceTagCe[0].text) * 1000))
+        elif len(priceTagPri):
+            priceTag = str(int(float(priceTagPri[0].text) * 1000))
         if priceTag == "":
             print("Cannot get price: " + url)
         else:
