@@ -4,6 +4,7 @@ import time
 from bs4 import BeautifulSoup
 import pyrebase
 from collections import OrderedDict
+import datetime
 
 def tryToGetThumbnailByBrief(soup):
     try:
@@ -42,6 +43,9 @@ db = firebase.database()
 
 ## Query stock codes and update price back to firebase
 dict = db.child("stocks").get().val()
+
+now = datetime.datetime.now();
+print("Scrapping stock at: " + now.strftime("%Y-%m-%d %H:%M:%S"));
 
 for key, value in dict.items():
     print("===Getting stock price for " + key)
